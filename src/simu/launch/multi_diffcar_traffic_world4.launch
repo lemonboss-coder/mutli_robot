@@ -1,0 +1,77 @@
+<launch>
+    <!-- x_pos、y_pos、z_pos和gui，分别表示机器人的初始位置和是否启用GUI界面 -->
+  <arg name="gui" default="true"/>
+
+  <!-- Robot 1 -->
+  <group ns="robot1">
+    <arg name="x_pos" default="0.0"/>
+    <arg name="y_pos" default="-1.0"/>
+    <arg name="z_pos" default="0.07"/>
+
+    <!-- 将模型文件写入参数服务器 -->
+    <arg name="robot_description" default="$(find xacro)/xacro $(find xju_simu)/urdf/xju_model.urdf.xacro ns:=robot1"/>
+    <param name="robot_description" command="$(arg robot_description)"/>
+
+    <!-- 关节以及机器人状态发布节点 -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" ></node>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+    <!-- <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher_robot1">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="robot_description" value="$(arg robot_description)" />
+    </node>
+    <node name="joint_state_publisher_robot1" pkg="joint_state_publisher" type="joint_state_publisher">
+      <param name="use_gui" value="$(arg gui)" />
+    </node> -->
+
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_robot1"
+          args="-urdf -model robot1 -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+
+    <!-- 设置一个全局坐标系map，这是rviz中显示多机器人的关键，将map坐标系作为机器人的odom坐标系的父亲，使得三个机器人能正常在rviz中显示 -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher_robot1" args="0 0 0 0 0 0 /map /odom" />
+
+  </group>
+
+  <include file="$(find xju_slam)/launch/amcl_only_robot1.launch" />
+  
+
+  <!-- Robot 3 -->
+  <!-- <group ns="robot3">
+    <arg name="x_pos" default="-1.0"/>
+    <arg name="y_pos" default="-1.0"/>
+    <arg name="z_pos" default="0.07"/>
+
+    <arg name="robot_description" default="$(find xacro)/xacro $(find xju_simu)/urdf/robot1.urdf.xacro ns:=robot3"/>
+    <param name="robot_description" command="$(arg robot_description)"/>
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher_robot3">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="robot_description" value="$(arg robot_description)" />
+    </node>
+    <node name="joint_state_publisher_robot3" pkg="joint_state_publisher" type="joint_state_publisher">
+      <param name="use_gui" value="$(arg gui)" />
+    </node>
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_robot3"
+          args="-urdf -model robot3 -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" /> -->
+
+    <!-- 设置一个全局坐标系map，这是rviz中显示多机器人的关键，将map坐标系作为机器人的odom坐标系的父亲，使得三个机器人能正常在rviz中显示 -->
+    <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher_robot3" args="0 0 0 0 0 0 /map /robot3_odom" /> -->
+
+  <!-- </group> -->
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find xju_simu)/worlds/traffic.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <arg name="map" default="$(find xju_slam)/map/traffic.yaml"/>
+  <node pkg="map_server" type="map_server" name="map_server" args="$(arg map)"/>
+
+  <!-- 启动 rviz -->
+  <!-- <node pkg="rviz" type="rviz" name="rviz" args="-d $(find xju_simu)/rviz/multi_diffcar.rviz" /> -->
+  <!-- <node pkg="rviz" type="rviz" name="rviz" /> -->
+</launch>

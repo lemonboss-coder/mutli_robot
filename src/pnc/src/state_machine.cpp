@@ -5,10 +5,25 @@
 #include <chrono>
 #include <fstream>
 #include "state_machine.h"
+#include <json/json.h>
+#include <iostream>
 
 namespace xju::pnc {
 
 uint8_t* StateMachine::cost_translation_ = nullptr;
+
+std::size_t hash_value(const line& line) {
+    std::size_t seed = 0;
+    seed ^= std::hash<double>{}(line.a.x) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+    seed ^= std::hash<double>{}(line.a.y) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+    seed ^= std::hash<double>{}(line.b.x) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+    seed ^= std::hash<double>{}(line.b.y) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+    return seed;
+}
+
+bool operator==(const line& line1, const line& line2) {
+    return line1.a == line2.a && line1.b == line2.b||line1.a == line2.b && line1.b == line2.a;
+}
 
 StateMachine::StateMachine()
   : tf_(new tf2_ros::Buffer()),
@@ -658,7 +673,7 @@ auto StateMachine::task_service(xju_pnc::xju_task::Request& req, xju_pnc::xju_ta
         }
         case xju_pnc::xju_task::Request::KEEP_TRAFFIC_ROUTE : {
           auto dir = root_path + "/map/";
-          auto map_path = dir + req.map + "_traffic_route.txt";
+          auto map_path = dir + req.map + "_traffic_route.json";
           if (!write_traffic_route(map_path, record_points_)) {
             resp.message = "Write file failed.";
           } else {
@@ -668,6 +683,20 @@ auto StateMachine::task_service(xju_pnc::xju_task::Request& req, xju_pnc::xju_ta
           record_path_.poses.clear();
           record_points_.clear();
           return true;
+        }
+        case xju_pnc::xju_task::Request::KEEP_TASK_POINT:{
+          auto dir = root_path + "/map/";
+          auto map_path = dir + req.map + "_task_point.json";
+          if (!write_task_point(map_path, record_points_)) {
+            resp.message = "Write file failed.";
+          } else {
+            resp.message = "Keep task point successful.";
+          }
+
+          record_path_.poses.clear();
+          record_points_.clear();
+          return true;
+
         }
         default:
           ROS_ERROR("Illegal service command in record %d", req.command);
@@ -686,6 +715,20 @@ auto StateMachine::task_service(xju_pnc::xju_task::Request& req, xju_pnc::xju_ta
       }
 
       half_struct_planner_->set_traffic_route(lines);
+      return true;
+    }
+    case xju_pnc::xju_task::Request::LOAD_TASK_POINT: {
+      task_points_type task_points;
+      lines_type lines;
+      auto dir = root_path + "/map/";
+      auto map_path = dir + req.map + "_task_point.json";
+      if (!read_task_points(map_path, task_points,lines)) {
+        resp.message = "read file failed.";
+      } else {
+        resp.message = "read file successful, got " + std::to_string(task_points.size()) + " points"+std::to_string(lines.size()) + " lines";
+      }
+
+      half_struct_planner_->set_task_point(task_points,lines);
       return true;
     }
     case xju_pnc::xju_task::Request::QR_NAV: {
@@ -873,6 +916,89 @@ auto StateMachine::write_traffic_route(std::string& file_path, std::vector<geome
   return true;
 }
 
+auto StateMachine::write_task_point(std::string& file_path, const std::vector<geometry_msgs::PointStamped>& line) -> bool {
+    // Read existing JSON file
+    Json::Value root(Json::objectValue);
+    std::ifstream existing_file(file_path);
+    if (existing_file.is_open()) {
+        existing_file >> root;
+        existing_file.close();
+    }
+
+    // Get the existing task points array or create a new one
+    Json::Value& task_points = root["task_point"];
+    if (!task_points.isArray()) {
+        task_points = Json::Value(Json::arrayValue);
+    }
+
+    // Find the maximum point order in the existing task points
+    int max_point_order = 0;
+    for (const Json::Value& point : task_points) {
+        int point_order = point["point_order"].asInt();
+        max_point_order = std::max(max_point_order, point_order);
+    }
+
+    // Check if each point in the input line already exists in the task points
+    for (const geometry_msgs::PointStamped& line_point : line) {
+        bool point_exists = false;
+        for (const Json::Value& point : task_points) {
+            double x = point["point_pose"]["x"].asDouble();
+            double y = point["point_pose"]["y"].asDouble();
+            if (x == line_point.point.x && y == line_point.point.y) {
+                point_exists = true;
+                break;
+            }
+        }
+
+        // If the point does not exist, add it to the task points with an updated point order
+        if (!point_exists) {
+            Json::Value new_point;
+            new_point["point_order"] = max_point_order + 1;
+            new_point["point_name"] = std::to_string(max_point_order + 1);
+            new_point["point_pose"]["x"] = line_point.point.x;
+            new_point["point_pose"]["y"] = line_point.point.y;
+
+            Json::Value contentEdges(Json::arrayValue);
+            if (!task_points.empty()) {
+                int prev_point_order = task_points[task_points.size() - 1]["point_order"].asInt();
+                Json::Value contentEdge;
+                contentEdge["destination"] = prev_point_order;
+                contentEdges.append(contentEdge);
+            }
+            new_point["contentEdges"] = contentEdges;
+
+            task_points.append(new_point);
+            max_point_order++;
+        }
+    }
+
+    // Rearrange "contentEdges" after "point_pose" in the JSON structure
+    for (Json::Value& point : task_points) {
+        Json::Value contentEdges = point["contentEdges"];
+        Json::Value point_pose = point["point_pose"];
+
+        point.removeMember("contentEdges");
+        point.removeMember("point_pose");
+
+        point["point_name"] = point["point_name"];
+        point["point_order"] = point["point_order"];
+        point["point_pose"] = point_pose;
+        point["contentEdges"] = contentEdges;
+    }
+
+
+    // Write the updated JSON to the file
+    std::ofstream output_file(file_path);
+    if (output_file.is_open()) {
+        output_file << root;
+        output_file.close();
+        return true;
+    } else {
+        return false;
+    }
+}
+
+  
 auto StateMachine::read_traffic_route(std::string& file_path, lines_type& lines) -> bool {
   std::ifstream in(file_path.c_str());
   if (!in.is_open()) {
@@ -908,5 +1034,78 @@ auto StateMachine::read_traffic_route(std::string& file_path, lines_type& lines)
   }
 
   return !lines.empty();
+}
+
+auto StateMachine::read_task_points(std::string& file_path, task_points_type& task_points, lines_type& lines) -> bool {
+    std::ifstream file(file_path);
+    if (!file.is_open()) {
+        ROS_ERROR("Failed to open file %s!", file_path.c_str());
+        return false;
+    }
+
+    Json::Value root;
+    file >> root;
+    line_t line;
+    const Json::Value& task_point_array = root["task_point"];
+    for (const Json::Value& task_point : task_point_array) {
+        task_point_t point;
+        point.x = task_point["point_pose"]["x"].asDouble();
+        point.y = task_point["point_pose"]["y"].asDouble();
+        point.num = task_point["point_order"].asInt();
+        
+        const Json::Value& content_edges = task_point["contentEdges"];
+        for (const Json::Value& content_edge : content_edges) {
+            int destination = content_edge["destination"].asInt();
+            point.destination.push_back(destination);
+        }
+
+        task_points.push_back(point);
+    }
+
+    file.close();
+
+    // std::unordered_set<line_t, std::size_t(*)(const line_t&)> uniqueLines(0, &hash_value);
+
+    // 打印读取的数据
+    for (const auto& point : task_points) {
+        ROS_INFO("Point - Num: %d, x: %f, y: %f", point.num, point.x, point.y);
+        ROS_INFO("Destinations: ");
+        for (const auto& dest : point.destination) {
+            ROS_INFO("%d", dest);
+        }
+    }
+   
+    for (const auto& point_a : task_points) {
+        for (const auto& dest : point_a.destination) {
+            for (const auto& point_b : task_points) {
+                int point_order = point_b.num;
+                if (point_order == dest && point_a.num != dest) {
+                    line.a.x = point_a.x;
+                    line.a.y = point_a.y;
+                    line.b.x = point_b.x;
+                    line.b.y = point_b.y;
+                    line.num_a = point_a.num;
+                    line.num_b = point_order;
+                    int flag = 0;
+                    for (const auto& line_end : lines) {
+                        // 检查是否已经存在相同的线段
+                        if(line.a == line_end.a && line.b == line_end.b||line.a == line_end.b && line.b == line_end.a){
+                            flag++;
+                        }
+                    }
+                    if (flag == 0){
+                      lines.emplace_back(line);
+                    }
+                    // // 检查是否已经存在相同的线段
+                    // if (uniqueLines.find(line) == uniqueLines.end()) {
+                    //     lines.emplace_back(line);
+                    //     uniqueLines.insert(line);
+                    // }
+                }
+            }
+        }
+    }
+
+    return !lines.empty();
 }
 }

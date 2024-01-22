@@ -13,6 +13,7 @@
 #include <tf2/utils.h>
 #include <tf2_ros/transform_listener.h>
 #include <vector>
+#include <unordered_set>
 
 #include "costmap_2d/costmap_2d.h"
 #include "costmap_2d/costmap_2d_ros.h"
@@ -119,7 +120,11 @@ private:
 
   auto write_traffic_route(std::string& file_path, std::vector<geometry_msgs::PointStamped> const& line) -> bool;
 
+  auto write_task_point(std::string& file_path, const std::vector<geometry_msgs::PointStamped>& line) -> bool ;
+
   auto read_traffic_route(std::string& file_path, lines_type& lines) -> bool;
+
+  auto read_task_points(std::string& file_path, task_points_type& task_points,lines_type& lines) -> bool ;
 
 private:
   std::unique_ptr<tf2_ros::Buffer> tf_;

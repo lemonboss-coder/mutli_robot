@@ -1,0 +1,848 @@
+{
+	"task_point" : 
+	[
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 1
+				}
+			],
+			"point_name" : "1",
+			"point_order" : 1,
+			"point_pose" : 
+			{
+				"x" : -15.302807807922363,
+				"y" : 11.341586112976074
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 1
+				},
+				{
+					"destination" : 8
+				}
+			],
+			"point_name" : "2",
+			"point_order" : 2,
+			"point_pose" : 
+			{
+				"x" : -15.302807807922363,
+				"y" : 7.9847583770751953
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 2
+				},
+				{
+					"destination" : 6
+				}
+			],
+			"point_name" : "3",
+			"point_order" : 3,
+			"point_pose" : 
+			{
+				"x" : -15.302807807922363,
+				"y" : -9.0419521331787109
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 3
+				}
+			],
+			"point_name" : "4",
+			"point_order" : 4,
+			"point_pose" : 
+			{
+				"x" : -15.302807807922363,
+				"y" : -12.085058212280273
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 4
+				}
+			],
+			"point_name" : "5",
+			"point_order" : 5,
+			"point_pose" : 
+			{
+				"x" : -11.909482955932617,
+				"y" : -12.072007179260254
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 5
+				}
+			],
+			"point_name" : "6",
+			"point_order" : 6,
+			"point_pose" : 
+			{
+				"x" : -11.909482955932617,
+				"y" : -9.0323095321655273
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 6
+				}
+			],
+			"point_name" : "7",
+			"point_order" : 7,
+			"point_pose" : 
+			{
+				"x" : -11.909482955932617,
+				"y" : -0.053301572799682617
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 7
+				}
+			],
+			"point_name" : "8",
+			"point_order" : 8,
+			"point_pose" : 
+			{
+				"x" : -11.909482955932617,
+				"y" : 7.9572057723999023
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 8
+				},
+				{
+					"destination" : 1
+				}
+			],
+			"point_name" : "9",
+			"point_order" : 9,
+			"point_pose" : 
+			{
+				"x" : -11.909482955932617,
+				"y" : 11.341586112976074
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 7
+				},
+				{
+					"destination" : 21
+				}
+			],
+			"point_name" : "10",
+			"point_order" : 10,
+			"point_pose" : 
+			{
+				"x" : -9.5977869033813477,
+				"y" : -0.053301572799682617
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 10
+				}
+			],
+			"point_name" : "11",
+			"point_order" : 11,
+			"point_pose" : 
+			{
+				"x" : -9.5977869033813477,
+				"y" : -3.0785057544708252
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 11
+				}
+			],
+			"point_name" : "12",
+			"point_order" : 12,
+			"point_pose" : 
+			{
+				"x" : -9.5977869033813477,
+				"y" : -6.0972237586975098
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 12
+				}
+			],
+			"point_name" : "13",
+			"point_order" : 13,
+			"point_pose" : 
+			{
+				"x" : -4.9440956115722656,
+				"y" : -6.0972237586975098
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 13
+				}
+			],
+			"point_name" : "14",
+			"point_order" : 14,
+			"point_pose" : 
+			{
+				"x" : 10.040865898132324,
+				"y" : -6.0972237586975098
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 14
+				}
+			],
+			"point_name" : "15",
+			"point_order" : 15,
+			"point_pose" : 
+			{
+				"x" : 10.040865898132324,
+				"y" : -3.0785057544708252
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 15
+				}
+			],
+			"point_name" : "16",
+			"point_order" : 16,
+			"point_pose" : 
+			{
+				"x" : 10.040865898132324,
+				"y" : 0.95461606979370117
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 16
+				}
+			],
+			"point_name" : "17",
+			"point_order" : 17,
+			"point_pose" : 
+			{
+				"x" : 10.040865898132324,
+				"y" : 2.9620201587677002
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 17
+				}
+			],
+			"point_name" : "18",
+			"point_order" : 18,
+			"point_pose" : 
+			{
+				"x" : 10.040865898132324,
+				"y" : 5.4271230697631836
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 18
+				}
+			],
+			"point_name" : "19",
+			"point_order" : 19,
+			"point_pose" : 
+			{
+				"x" : -4.9432754516601562,
+				"y" : 5.4271230697631836
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 19
+				}
+			],
+			"point_name" : "20",
+			"point_order" : 20,
+			"point_pose" : 
+			{
+				"x" : -9.5977869033813477,
+				"y" : 5.4271230697631836
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 20
+				}
+			],
+			"point_name" : "21",
+			"point_order" : 21,
+			"point_pose" : 
+			{
+				"x" : -9.5977869033813477,
+				"y" : 2.9370341300964355
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 21
+				}
+			],
+			"point_name" : "22",
+			"point_order" : 22,
+			"point_pose" : 
+			{
+				"x" : -3.9498999118804932,
+				"y" : 2.9370341300964355
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 22
+				}
+			],
+			"point_name" : "23",
+			"point_order" : 23,
+			"point_pose" : 
+			{
+				"x" : -3.9818861484527588,
+				"y" : 0.96487772464752197
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 23
+				}
+			],
+			"point_name" : "24",
+			"point_order" : 24,
+			"point_pose" : 
+			{
+				"x" : -0.9917452335357666,
+				"y" : 0.93052494525909424
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 24
+				},
+				{
+					"destination" : 22
+				}
+			],
+			"point_name" : "25",
+			"point_order" : 25,
+			"point_pose" : 
+			{
+				"x" : -0.98436713218688965,
+				"y" : 2.9370341300964355
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 25
+				}
+			],
+			"point_name" : "26",
+			"point_order" : 26,
+			"point_pose" : 
+			{
+				"x" : 2.013209342956543,
+				"y" : 2.9370341300964355
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 26
+				}
+			],
+			"point_name" : "27",
+			"point_order" : 27,
+			"point_pose" : 
+			{
+				"x" : 2.0331082344055176,
+				"y" : 0.98482966423034668
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 27
+				}
+			],
+			"point_name" : "28",
+			"point_order" : 28,
+			"point_pose" : 
+			{
+				"x" : 5.0569705963134766,
+				"y" : 0.97915244102478027
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 28
+				},
+				{
+					"destination" : 26
+				},
+				{
+					"destination" : 17
+				}
+			],
+			"point_name" : "29",
+			"point_order" : 29,
+			"point_pose" : 
+			{
+				"x" : 5.0113506317138672,
+				"y" : 2.9370341300964355
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 11
+				}
+			],
+			"point_name" : "30",
+			"point_order" : 30,
+			"point_pose" : 
+			{
+				"x" : -5.4687414169311523,
+				"y" : -3.0785057544708252
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 30
+				}
+			],
+			"point_name" : "31",
+			"point_order" : 31,
+			"point_pose" : 
+			{
+				"x" : -5.4687414169311523,
+				"y" : -1.3212745189666748
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 31
+				}
+			],
+			"point_name" : "32",
+			"point_order" : 32,
+			"point_pose" : 
+			{
+				"x" : -3.265946626663208,
+				"y" : -1.3212745189666748
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 32
+				},
+				{
+					"destination" : 30
+				}
+			],
+			"point_name" : "33",
+			"point_order" : 33,
+			"point_pose" : 
+			{
+				"x" : -3.265946626663208,
+				"y" : -3.0785057544708252
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 33
+				}
+			],
+			"point_name" : "34",
+			"point_order" : 34,
+			"point_pose" : 
+			{
+				"x" : -0.94494175910949707,
+				"y" : -3.0785057544708252
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 34
+				}
+			],
+			"point_name" : "35",
+			"point_order" : 35,
+			"point_pose" : 
+			{
+				"x" : -0.94494175910949707,
+				"y" : -1.0668662786483765
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 35
+				}
+			],
+			"point_name" : "36",
+			"point_order" : 36,
+			"point_pose" : 
+			{
+				"x" : 2.9860448837280273,
+				"y" : -1.0929050445556641
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 36
+				},
+				{
+					"destination" : 34
+				}
+			],
+			"point_name" : "37",
+			"point_order" : 37,
+			"point_pose" : 
+			{
+				"x" : 2.9860448837280273,
+				"y" : -3.0785057544708252
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 37
+				}
+			],
+			"point_name" : "38",
+			"point_order" : 38,
+			"point_pose" : 
+			{
+				"x" : 5.0397429466247559,
+				"y" : -3.0785057544708252
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 38
+				}
+			],
+			"point_name" : "39",
+			"point_order" : 39,
+			"point_pose" : 
+			{
+				"x" : 5.0397429466247559,
+				"y" : -1.077644944190979
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 39
+				}
+			],
+			"point_name" : "40",
+			"point_order" : 40,
+			"point_pose" : 
+			{
+				"x" : 6.6709122657775879,
+				"y" : -1.0832434892654419
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 40
+				},
+				{
+					"destination" : 15
+				},
+				{
+					"destination" : 38
+				}
+			],
+			"point_name" : "41",
+			"point_order" : 41,
+			"point_pose" : 
+			{
+				"x" : 6.6709122657775879,
+				"y" : -3.0785057544708252
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 8
+				},
+				{
+					"destination" : 19
+				}
+			],
+			"point_name" : "42",
+			"point_order" : 42,
+			"point_pose" : 
+			{
+				"x" : -4.9432754516601562,
+				"y" : 7.9572057723999023
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 42
+				}
+			],
+			"point_name" : "43",
+			"point_order" : 43,
+			"point_pose" : 
+			{
+				"x" : 13.556251525878906,
+				"y" : 7.9572057723999023
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 43
+				},
+				{
+					"destination" : 9
+				}
+			],
+			"point_name" : "44",
+			"point_order" : 44,
+			"point_pose" : 
+			{
+				"x" : 13.556251525878906,
+				"y" : 11.257343292236328
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 44
+				}
+			],
+			"point_name" : "45",
+			"point_order" : 45,
+			"point_pose" : 
+			{
+				"x" : 16.779815673828125,
+				"y" : 11.257343292236328
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 52
+				}
+			],
+			"point_name" : "46",
+			"point_order" : 46,
+			"point_pose" : 
+			{
+				"x" : 16.779815673828125,
+				"y" : -9.0801258087158203
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 46
+				}
+			],
+			"point_name" : "47",
+			"point_order" : 47,
+			"point_pose" : 
+			{
+				"x" : 16.779815673828125,
+				"y" : -11.761812210083008
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 47
+				},
+				{
+					"destination" : 5
+				}
+			],
+			"point_name" : "48",
+			"point_order" : 48,
+			"point_pose" : 
+			{
+				"x" : 13.556251525878906,
+				"y" : -11.761812210083008
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 48
+				},
+				{
+					"destination" : 46
+				}
+			],
+			"point_name" : "49",
+			"point_order" : 49,
+			"point_pose" : 
+			{
+				"x" : 13.556251525878906,
+				"y" : -9.0612545013427734
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 49
+				},
+				{
+					"destination" : 43
+				},
+				{
+					"destination" : 16
+				}
+			],
+			"point_name" : "50",
+			"point_order" : 50,
+			"point_pose" : 
+			{
+				"x" : 13.556251525878906,
+				"y" : 0.95461606979370117
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 49
+				},
+				{
+					"destination" : 13
+				},
+				{
+					"destination" : 6
+				}
+			],
+			"point_name" : "51",
+			"point_order" : 51,
+			"point_pose" : 
+			{
+				"x" : -4.9687566757202148,
+				"y" : -9.0758304595947266
+			}
+		},
+		{
+			"contentEdges" : 
+			[
+				{
+					"destination" : 43
+				},
+				{
+					"destination" : 45
+				},
+				{
+					"destination" : 46
+				}
+			],
+			"point_name" : "52",
+			"point_order" : 52,
+			"point_pose" : 
+			{
+				"x" : 16.779815673828125,
+				"y" : 7.9572057723999023
+			}
+		}
+	]
+}

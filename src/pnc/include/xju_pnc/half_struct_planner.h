@@ -26,17 +26,29 @@ bool operator==(point const& rhs) const {
 typedef struct line {
 point_t a;
 point_t b;
+int num_a;
+int num_b;
 std::vector<int> go_list {};
 } line_t;
 
 using lines_type = std::vector<line_t>;
+
+
+typedef struct task_point {
+int num;
+double x;
+double y;
+std::vector<int> destination {};
+} task_point_t;
+
+using task_points_type = std::vector<task_point_t>;
 
 typedef struct graph {
 double cost = std::numeric_limits<double>::max();
 std::vector<geometry_msgs::PoseStamped> edge{};
 } graph_t; // 没有用这个结构体实现，因为边都是直线，因此简单替换成长度了，如果支持复杂通道，需要把路径作为边存下来
 
-constexpr static const int EXTRA_POINTS_NUM = 3;
+constexpr static const int EXTRA_POINTS_NUM = 1;
 constexpr static const double EXTRA_POINTS_RANGE = 5.0;
 
 class HalfStructPlanner {
@@ -52,6 +64,7 @@ public:
   }
 
   void set_traffic_route(lines_type const& lines);
+  void set_task_point(task_points_type const& points,lines_type const& lines);
 
 //  auto get_path(geometry_msgs::PoseStamped const& start, geometry_msgs::PoseStamped const& goal) -> nav_msgs::Path;
   auto get_path(geometry_msgs::PoseStamped const& start,
@@ -61,10 +74,12 @@ public:
 
 private:
   void show_traffic_route();
+  void show_task_point();
 
   void show_graph();
 
   void calculate_pre_graph();
+  void calculate_pre_graph2();
 
   void calculate_graph();
 
@@ -92,8 +107,10 @@ private:
 
 private:
   lines_type traffic_routes_;
+  task_points_type task_points_;
 
   ros::Publisher vis_pub_;
+  ros::Publisher vis_pub_point;
   ros::Publisher res_pub_;
 
 //  graph_type **graph_;

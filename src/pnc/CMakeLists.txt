@@ -20,6 +20,11 @@ find_package(catkin REQUIRED COMPONENTS
         tf2_ros
         )
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(JSONCPP jsoncpp)
+include_directories(${JSONCPP_INCLUDE_DIRS})
+link_directories(${JSONCPP_LIBRARY_DIRS})
+
 add_service_files(
         DIRECTORY srv
         FILES
@@ -55,7 +60,7 @@ add_executable(xju_state_machine
         src/state_machine.cpp
         src/half_struct_planner.cpp)
 add_dependencies(xju_state_machine ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(xju_state_machine ${catkin_LIBRARIES})
+target_link_libraries(xju_state_machine ${catkin_LIBRARIES} ${JSONCPP_LIBRARIES})
 
 add_executable(xju_wall_follow
         node/wall_follow_node.cpp)

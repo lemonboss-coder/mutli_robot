@@ -1,0 +1,20 @@
+<launch>
+    <!-- Arguments -->
+    <arg name="cmd_vel_topic" default="/cmd_vel" />
+    <arg name="odom_topic" default="odom" />
+    <!-- <arg name="localization_rviz" default="false"/> -->
+    <arg name="localization_rviz" default="true"/>
+    <arg name="pnc_rviz" default="true"/>
+
+    <!-- amcl -->
+    <!--<include file="$(find xju_slam)/launch/localization.launch">
+        <arg name="rviz" value="$(arg localization_rviz)" />
+    </include>-->
+
+    <!-- amcl3d -->
+    <include file="$(find xju_slam)/launch/multi_localization.launch">
+        <arg name="rviz" value="$(arg localization_rviz)" />
+    </include>
+
+
+</launch>
